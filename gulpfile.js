@@ -16,6 +16,7 @@ gulp.task('css', function() {
   return gulp.src('dev/sass/application.scss')
     .pipe(globbing({extensions: '.scss'}))
     .pipe(sass())
+    .on('error', handleError)
     .pipe(cmq()) // combine all @media queries into the page base
     .pipe(autoprefixer({cascade: false})) // auto prefix
     .pipe(minifycss()) // minify everything
@@ -27,6 +28,7 @@ gulp.task('js', function() {
   return gulp.src('dev/js/**/*.js')
     .pipe(newer('public/js'))
     .pipe(uglify())
+    .on('error', handleError)
     .pipe(gulp.dest('public/js'));
 });
 
@@ -43,6 +45,7 @@ gulp.task('img', function() {
         removeViewBox: false
       }]
     }))
+    .on('error', handleError)
     .pipe(gulp.dest('public/img'));
 });
 
@@ -65,3 +68,9 @@ gulp.task('watch', ['start'], function() {
 
 // Default function
 gulp.task('default', ['watch']);
+
+// Error reporting function
+function handleError(err) {
+  console.log(err.toString());
+  this.emit('end');
+}
