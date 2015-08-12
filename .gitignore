@@ -1,2 +1,4 @@
-node_modules/*
+.publish
+node_modules
+public/.DS_Store
 .powder
