@@ -2,13 +2,13 @@ var gulp = require('gulp'),
     ghPages = require('gulp-gh-pages'),
     sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
-    minifycss = require('gulp-minify-css'),
+    cssnano = require('gulp-cssnano'),
     uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin'),
     livereload = require('gulp-livereload'),
     newer = require('gulp-newer'),
     globbing = require('gulp-css-globbing'),
-    cmq = require('gulp-combine-media-queries');
+    combineMq = require('gulp-combine-mq');
 
 
 // ROOT TASKS // ---------------------------------------------------------
@@ -18,9 +18,9 @@ gulp.task('css', function() {
     .pipe(globbing({extensions: '.scss'}))
     .pipe(sass())
     .on('error', handleError)
-    .pipe(cmq()) // combine all @media queries into the page base
+    .pipe(combineMq({beautify: false}))
     .pipe(autoprefixer({cascade: false})) // auto prefix
-    .pipe(minifycss()) // minify everything
+    .pipe(cssnano()) // minify everything
     .pipe(gulp.dest('public/css'));
 });
 
