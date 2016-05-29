@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    ghpages = require('gulp-gh-pages'),
     sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     globbing = require('gulp-css-globbing'),
@@ -69,6 +70,11 @@ gulp.task('connect', function() {
     base: 'public/',
     keepalive: false
   });
+});
+
+gulp.task('deploy', function() {
+  return gulp.src('public/**/*')
+    .pipe(ghpages());
 });
 
 gulp.task('default', ['css', 'vendor-js', 'js', 'img', 'connect']);
