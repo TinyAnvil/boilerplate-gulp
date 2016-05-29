@@ -64,7 +64,7 @@ gulp.task('connect', function() {
  
   livereload.listen();
 
-  gulp.watch(['public/*.html', 'prod/js/*.js', 'prod/img/**/*.{jpg,jpeg,png,gif,svg,ico}', 'prod/css/*.css']).on('change', livereload.changed);
+  gulp.watch(['public/*.html', 'public/js/*.js', 'public/img/**/*.{jpg,jpeg,png,gif,svg,ico}', 'public/css/*.css']).on('change', livereload.changed);
 
   connect.server({
     base: 'public/',
