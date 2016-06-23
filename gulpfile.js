@@ -9,7 +9,7 @@ var gulp = require('gulp'),
     newer = require('gulp-newer'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
-    connect = require('gulp-connect-php'),
+    connect = require('gulp-connect'),
     livereload = require('gulp-livereload');
 
 gulp.task('css', function() {
@@ -61,14 +61,14 @@ gulp.task('connect', function() {
   gulp.watch('dev/js/vendor/*.js', ['vendor-js']);
   gulp.watch(['dev/js/**/*.js', '!dev/js/vendor/*.js'], ['js']);
   gulp.watch('dev/img/**/*.{jpg,jpeg,png,gif,svg,ico}', ['img']);
- 
+
   livereload.listen();
 
   gulp.watch(['public/*.html', 'public/js/*.js', 'public/img/**/*.{jpg,jpeg,png,gif,svg,ico}', 'public/css/*.css']).on('change', livereload.changed);
 
   connect.server({
-    base: 'public/',
-    keepalive: false
+    root: 'public/',
+    port: 8000
   });
 });
 
